@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- My CSS -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="images/favicon1.png">
+
+    <!-- Sript -->
+    <script src="app.js" defer></script>
+</head>
+<body style="background: #F0E9E1;">
+    <div class="wrapper">
+        <header>
+            <div class="icon">
+                <img src="images/logo/logo-for-light-mode.png" alt="" style="width: 84px; height: 50px;">
+            </div>
+            <div class="nav-burger">
+                <img src="images/burger-menu-icon.png" alt="">
+            </div>
+            <div class="nav-menu">
+                <img src="images/close-icon.png" alt="" style="height: 40px; width: 40px;">
+                <ul>
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="project.html">Projects</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+
+                <div class="toggle-button">
+                    <div class="circle">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- CONTACT SECTION STRUCTURE -->
+        <div class="contact-wrapper">
+            <div class="contact-info">
+                <div class="contact-me">
+                    <img src="images/contact-icon.png" alt="" style="height: 70px" width="85px">
+                    <h2>CONTACT ME<h2>
+                </div>
+                <p>If you are interested to work with me, you can send me a message via email at <u>rabanzomelanie@gmail.com</u> or you can fill out the form.</p>
+            </div>
+            <span></span>
+            <div class="contact-form">
+                <p class="errorMessage"></p>
+                <input type="text" placeholder="Enter your name" class="input" id="name" required>
+                <input type="text" placeholder="Enter your email" class="input" id="email" required>
+                <textarea name="" id="" rows="5" placeholder="Enter your message" style="resize: none;"></textarea>
+                <button id="submitContact">Submit</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const emailInput = document.getElementById('email');
+        const nameInput = document.getElementById('name');
+        const submitBtn = document.getElementById('submitContact');
+        const errorMessage = document.querySelector('.errorMessage');
+        function validateEmail(inputText)
+        {
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if(inputText.value.match(mailformat))
+            {
+            // alert("Valid email address!");
+            errorMessage.innerHTML = "";
+            return true;
+            }
+            else
+            {
+            // alert("You have entered an invalid email address!");
+            errorMessage.innerHTML = `You have entered an invalid email address!`
+            emailInput.style.outline = 'red';
+            
+            return false;
+            }
+        }
+
+        submitBtn.addEventListener('click', e => {
+            if(emailInput.value == "" || nameInput.value == ""){
+                errorMessage.innerHTML = "Please input your credentials."
+            } else {
+                validateEmail(emailInput);
+            }
+        });
+    </script>
+</body>
+</html>
