@@ -13,6 +13,7 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
     color: var(--primary-color);
+    text-decoration: none;
 }
 
 body{
@@ -198,7 +199,7 @@ section .title{
     margin-bottom: 2rem;
 }
 
-:where(.project-card, .project-info, .project-menu-wrapper, .project-tags p) {
+:is(.project-card, .project-info, .project-menu-wrapper) {
     border-radius: 5px;
   }
 
@@ -236,7 +237,7 @@ section .projects .project-card .project-info .project-menu-wrapper{
     width: 100%;
     opacity: 0;
     position: absolute;
-    background: #fff;
+    background: #6c768a;
     text-align: center;
     transition: all 0.5s ease;
 }
@@ -262,6 +263,7 @@ section .projects .project-card .project-info .project-menu-wrapper .project-men
 .project-title {
     text-align: center;
     font-size: 1.2rem;
+    font-weight: 400;
     color: #fff;
 }
 
@@ -276,7 +278,8 @@ section .projects .project-card .project-info .project-menu-wrapper .project-men
     font-size: 0.675rem;
     padding: 0.3rem 0.875rem;
     background: #d9d9d9;
-    cursor: default;
+    box-shadow: 1px 2px #b8b0b0ad;
+    border-radius: none;
 }
 
 /* END OF PROJECT PAGE CONTENT STYLING */
