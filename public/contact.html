@@ -66,13 +66,13 @@
                     </p>
                 </div>
                 <span></span>
-                <form action="" class="contact-form">
+                <form action="POST" class="contact-form">
                     <p class="errorMessage"></p>
                     <input
                         type="text"
-                        placeholder="Enter your name"
+                        placeholder="Subject"
                         class="input"
-                        id="name"
+                        id="subject"
                         required
                     />
                     <input
@@ -84,27 +84,68 @@
                     />
                     <textarea
                         name=""
-                        id=""
+                        id="message"
                         rows="5"
                         placeholder="Enter your message"
                         style="resize: none"
                     ></textarea>
-                    <button id="submitContact">Submit</button>
+                    <button id="submitContact" type="submit">Submit</button>
                 </form>
             </div>
         </div>
 
         <script>
             const emailInput = document.getElementById("email");
-            const nameInput = document.getElementById("name");
+            const subjectInput = document.getElementById("subject");
+            const messageInput = document.getElementById("message");
             const submitBtn = document.getElementById("submitContact");
             const errorMessage = document.querySelector(".errorMessage");
+
+            // function httprequest(formData) {
+            //     let xhr = new XMLHttpRequest();
+            //     xhr.open("POST", "/");
+            //     xhr.setRequestHeader("content-type", "application/json");
+            //     xhr.onload = function () {
+            //         console.log(xhr.responseText);
+            //         if (xhr.responseText == "success") {
+            //             alert("Email sent!");
+            //             emailInput.value = "";
+            //             subjectInput.value = "";
+            //             messageInput.value = "";
+            //         } else {
+            //             alert("Something went wrong!");
+            //         }
+            //     };
+            //     xhr.send(JSON.stringify(formData));
+            // }
+
             function validateEmail(inputText) {
                 var mailformat =
                     /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
                 if (inputText.value.match(mailformat)) {
                     // alert("Valid email address!");
                     errorMessage.innerHTML = "";
+                    let formData = {
+                        subject: subjectInput.value,
+                        email: emailInput.value,
+                        message: messageInput.value,
+                    };
+                    let xhr = new XMLHttpRequest();
+                    xhr.open("POST", "/contact");
+                    xhr.setRequestHeader("content-type", "application/json");
+                    xhr.onload = function () {
+                        console.log(xhr.responseText);
+                        if (xhr.responseText == "success") {
+                            alert("Email sent!");
+                            emailInput.value = "";
+                            subjectInput.value = "";
+                            messageInput.value = "";
+                        } else {
+                            alert("Something went wrong!");
+                        }
+                    };
+                    xhr.send(JSON.stringify(formData));
+
                     return true;
                 } else {
                     // alert("You have entered an invalid email address!");
@@ -116,7 +157,8 @@
             }
 
             submitBtn.addEventListener("click", (e) => {
-                if (emailInput.value == "" || nameInput.value == "") {
+                e.preventDefault();
+                if (emailInput.value == "" || subjectInput.value == "") {
                     errorMessage.innerHTML = "Please input your credentials.";
                 } else {
                     validateEmail(emailInput);

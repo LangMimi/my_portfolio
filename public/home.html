@@ -63,4 +63,30 @@
             </div>
         </div>
     </body>
+
+    <script>
+        const greetings = document.querySelector(".main-content .greetings");
+
+        window.addEventListener("load", () => {
+            greetings.classList.add("active");
+        });
+
+        // for typewriter animation
+        const pText = document.querySelector(".main-content p");
+        const text = `I’m Melanie, a front-end web developer.`;
+        let index = 0;
+
+        function typeWriter() {
+            pText.innerText = text.slice(0, index);
+
+            index++;
+            if (index > text.length) {
+                index = 0;
+            }
+        }
+        //ASYNC
+        setTimeout(() => {
+            setInterval(typeWriter, 100);
+        }, 1000);
+    </script>
 </html>
