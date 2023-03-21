@@ -43,7 +43,7 @@ app.post("/contact", (req, res) => {
         from: req.body.email,
         to: "mimirabanzo@gmail.com",
         subject: req.body.subject,
-        text: req.body.message,
+        text: `${req.body.message} \n\nFrom: ${req.body.email}`,
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
